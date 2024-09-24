@@ -1,7 +1,7 @@
 // src/api/api.js
 import axios from 'axios';
 
-const API_KEY = process.env.NEXT_PUBLIC_KEY; // Access the environment variable
+const API_KEY = process.env.NEXT_PUBLIC_KEY_MOVIE_API; // Access the environment variable
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 

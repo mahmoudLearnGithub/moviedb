@@ -11,32 +11,92 @@ const MovieDetailPage = () => {
     const [movie, setMovie] = useState(null); // State to hold movie details
     const [cast, setCast] = useState([]);     // State to hold movie cast
 
+    // useEffect(() => {
+    //     if (!id) return; // If no ID, return
+
+    //     console.log('Fetching movie details for ID:', id);
+
+    //     // Fetch movie details
+    //     api.get(`/movie/${id}`)
+    //         .then((response) => {
+    //             console.log('Movie response data:', response.data);  // Debug the movie data
+    //             setMovie(response.data); // Set the movie data in state
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error fetching movie details:', error);  // Handle errors
+    //         });
+
+    //     // Fetch movie cast
+    //     api.get(`/movie/${id}/credits`)
+    //         .then((response) => {
+    //             console.log('Cast response data:', response.data); // Debug the cast data
+    //             setCast(response.data.cast);  // Set the cast data in state
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error fetching movie cast:', error);  // Handle errors
+    //         });
+    // }, [id]);  // This effect will run when the `id` changes
     useEffect(() => {
         if (!id) return; // If no ID, return
-
-        console.log('Fetching movie details for ID:', id);
-
+        
+        console.log('Movie ID:', id); // Log the ID here
+    
         // Fetch movie details
         api.get(`/movie/${id}`)
             .then((response) => {
-                console.log('Movie response data:', response.data);  // Debug the movie data
-                setMovie(response.data); // Set the movie data in state
+                console.log('Movie response data:', response.data);
+                setMovie(response.data);
             })
             .catch((error) => {
-                console.error('Error fetching movie details:', error);  // Handle errors
+                console.error('Error fetching movie details:', error);
             });
-
+    
         // Fetch movie cast
         api.get(`/movie/${id}/credits`)
             .then((response) => {
-                console.log('Cast response data:', response.data); // Debug the cast data
-                setCast(response.data.cast);  // Set the cast data in state
+                console.log('Cast response data:', response.data);
+                setCast(response.data.cast);
             })
             .catch((error) => {
-                console.error('Error fetching movie cast:', error);  // Handle errors
+                console.error('Error fetching movie cast:', error);
             });
-    }, [id]);  // This effect will run when the `id` changes
-
+    }, [id]);
+    useEffect(() => {
+        console.log('Current ID:', id); // Log every time useEffect runs
+        if (!id) return;
+    
+        // Fetching logic...
+    }, [id]);
+    useEffect(() => {
+        console.log('Router Query:', router.query); // Log the entire router query
+    }, [router.query]);
+    useEffect(() => {
+        console.log('Current ID:', id); // Log ID on each render
+        console.log('Router Query:', router.query); // Log the entire query object
+    
+        if (!id) return; // If no ID, return
+    
+        // Fetch movie details
+        api.get(`/movie/${id}`)
+            .then((response) => {
+                console.log('Movie response data:', response.data);
+                setMovie(response.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching movie details:', error);
+            });
+    
+        // Fetch movie cast
+        api.get(`/movie/${id}/credits`)
+            .then((response) => {
+                console.log('Cast response data:', response.data);
+                setCast(response.data.cast);
+            })
+            .catch((error) => {
+                console.error('Error fetching movie cast:', error);
+            });
+    }, [id]);
+                
     if (!movie) return <div className="text-center text-white mt-10">Loading...</div>; // Show loading state
 
     return (
